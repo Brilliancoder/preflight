@@ -12,6 +12,7 @@ Every check lives in `src/rules/<id>.js`. Want one that isn't here? [Add it](../
 | `no-error-monitoring` | Reliability | info | A JavaScript app with no Sentry, PostHog, Bugsnag, Rollbar or LogRocket |
 | `no-privacy-policy` | Launch basics | warning | An app that signs users up or collects emails but has no privacy page |
 | `missing-meta-tags` | Launch basics | warning | An `index.html` or Next.js root layout without a title, description or share image |
+| `missing-favicon` | Launch basics | info | An `index.html` or Next.js root layout with no `favicon.ico`, `icon.png`, `app/icon.*` or `<link rel="icon">` |
 
 ## Scoring
 
@@ -26,7 +27,7 @@ Add a comment on the line, or the line above:
 app.use(cors());
 ```
 
-This works for findings that point at a line. Findings about a whole file or project (`env-file-committed`, `stripe-webhook-unverified`, `no-error-monitoring`, `no-privacy-policy`, `missing-meta-tags`) are skipped with `--ignore` instead:
+This works for findings that point at a line. Findings about a whole file or project (`env-file-committed`, `stripe-webhook-unverified`, `no-error-monitoring`, `no-privacy-policy`, `missing-meta-tags`, `missing-favicon`) are skipped with `--ignore` instead:
 
 ```bash
 npx vibe-preflight --ignore no-error-monitoring,no-privacy-policy
