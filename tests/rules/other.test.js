@@ -5,6 +5,7 @@ import cors from '../../src/rules/cors-wildcard.js';
 import monitoring from '../../src/rules/no-error-monitoring.js';
 import privacy from '../../src/rules/no-privacy-policy.js';
 import meta from '../../src/rules/missing-meta-tags.js';
+import favicon from '../../src/rules/missing-favicon.js';
 
 test('cors-wildcard flags cors() with no options and a * header', async () => {
   const f = cors.check(await fixtureProject('cors-wildcard', 'bad'));
@@ -52,4 +53,18 @@ test('missing-meta-tags names the missing tags', async () => {
 test('missing-meta-tags is quiet for complete HTML and Next.js metadata', async () => {
   assert.deepEqual(meta.check(await fixtureProject('missing-meta-tags', 'good')), []);
   assert.deepEqual(meta.check(await fixtureProject('missing-meta-tags', 'good-next')), []);
+});
+
+test('missing-favicon flags an index.html with no icon', async () => {
+  const f = favicon.check(await fixtureProject('missing-favicon', 'bad'));
+  assert.equal(f.length, 1);
+  assert.equal(f[0].file, 'index.html');
+  assert.equal(favicon.category, 'launch');
+  assert.equal(favicon.severity, 'info');
+});
+
+test('missing-favicon is quiet with public/favicon.ico, a <link rel="icon"> or Next.js app/favicon.ico', async () => {
+  assert.deepEqual(favicon.check(await fixtureProject('missing-favicon', 'good')), []);
+  assert.deepEqual(favicon.check(await fixtureProject('missing-favicon', 'good-vite')), []);
+  assert.deepEqual(favicon.check(await fixtureProject('missing-favicon', 'good-next')), []);
 });
