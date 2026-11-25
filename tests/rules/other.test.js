@@ -5,6 +5,7 @@ import cors from '../../src/rules/cors-wildcard.js';
 import monitoring from '../../src/rules/no-error-monitoring.js';
 import privacy from '../../src/rules/no-privacy-policy.js';
 import meta from '../../src/rules/missing-meta-tags.js';
+import robots from '../../src/rules/missing-robots-txt.js';
 
 test('cors-wildcard flags cors() with no options and a * header', async () => {
   const f = cors.check(await fixtureProject('cors-wildcard', 'bad'));
@@ -52,4 +53,18 @@ test('missing-meta-tags names the missing tags', async () => {
 test('missing-meta-tags is quiet for complete HTML and Next.js metadata', async () => {
   assert.deepEqual(meta.check(await fixtureProject('missing-meta-tags', 'good')), []);
   assert.deepEqual(meta.check(await fixtureProject('missing-meta-tags', 'good-next')), []);
+});
+
+test('missing-robots-txt flags a Vite app with no public/robots.txt', async () => {
+  const f = robots.check(await fixtureProject('missing-robots-txt', 'bad'));
+  assert.equal(f.length, 1);
+  assert.equal(f[0].file, 'index.html');
+  assert.equal(robots.category, 'launch');
+  assert.equal(robots.severity, 'info');
+});
+
+test('missing-robots-txt is quiet with public/robots.txt, Next.js app/robots.ts, or no website', async () => {
+  assert.deepEqual(robots.check(await fixtureProject('missing-robots-txt', 'good')), []);
+  assert.deepEqual(robots.check(await fixtureProject('missing-robots-txt', 'good-next')), []);
+  assert.deepEqual(robots.check(await fixtureProject('missing-robots-txt', 'good-backend')), []);
 });
