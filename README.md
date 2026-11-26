@@ -9,6 +9,9 @@ Preflight scans your project for leaked keys, open databases, unverified payment
 [![License: MIT](https://img.shields.io/badge/license-MIT-34d399.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%E2%89%A520-38bdf8.svg)](package.json)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-fbbf24.svg)](CONTRIBUTING.md)
+[![npm version](https://img.shields.io/npm/v/vibe-preflight)](https://www.npmjs.com/package/vibe-preflight)
+[![npm downloads](https://img.shields.io/npm/dm/vibe-preflight)](https://www.npmjs.com/package/vibe-preflight)
+[![CI](https://github.com/erdellll/preflight/actions/workflows/ci.yml/badge.svg)](https://github.com/erdellll/preflight/actions/workflows/ci.yml)
 
 ![Preflight report card](docs/assets/report-card.png)
 
