@@ -1,1 +1,8 @@
 blank_issues_enabled: true
+contact_links:
+  - name: All checks and what they flag
+    url: https://github.com/erdellll/preflight/blob/main/docs/rules.md
+    about: Read this before suggesting a new check.
+  - name: How to contribute
+    url: https://github.com/erdellll/preflight/blob/main/CONTRIBUTING.md
+    about: Add a check in 3 steps.
