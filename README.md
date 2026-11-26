@@ -12,6 +12,7 @@ Preflight scans your project for leaked keys, open databases, unverified payment
 [![npm version](https://img.shields.io/npm/v/vibe-preflight)](https://www.npmjs.com/package/vibe-preflight)
 [![npm downloads](https://img.shields.io/npm/dm/vibe-preflight)](https://www.npmjs.com/package/vibe-preflight)
 [![CI](https://github.com/erdellll/preflight/actions/workflows/ci.yml/badge.svg)](https://github.com/erdellll/preflight/actions/workflows/ci.yml)
+**English** · [हिन्दी](docs/README.hi.md)
 
 ![Preflight report card](docs/assets/report-card.png)
 
