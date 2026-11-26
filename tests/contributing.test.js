@@ -36,6 +36,12 @@ test('every rule flags its bad fixture with a fix, and passes its good fixture',
   }
 });
 
+test('every check title is short enough for the report card', async () => {
+  for (const rule of await loadRules()) {
+    assert.ok(rule.title.length <= 60, `${rule.id}: title is ${rule.title.length} characters`);
+  }
+});
+
 test('contributor docs and templates exist', () => {
   for (const p of ['CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', '.github/pull_request_template.md', '.github/ISSUE_TEMPLATE/new-check.yml', '.github/ISSUE_TEMPLATE/false-positive.yml', '.github/workflows/ci.yml', 'docs/seed-issues.md']) {
     assert.ok(existsSync(root(p)), p);
