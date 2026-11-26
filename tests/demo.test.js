@@ -30,3 +30,13 @@ test('docs/rules.md lists every rule id', async () => {
   const doc = readFileSync(new URL('../docs/rules.md', import.meta.url), 'utf8');
   for (const r of await loadRules()) assert.ok(doc.includes(`\`${r.id}\``), r.id);
 });
+
+
+test('README check count matches the number of rules', async () => {
+    const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8');
+    const match = readme.match(/(\d+) checks today/);
+    assert.ok(match, 'README should say how many checks it runs today');
+    const count = Number(match[1]);
+    const rules = await loadRules();
+    assert.equal(count, rules.length, 'README says ' + count + ' checks but there are ' + rules.length + ': update the count in README.md');
+});
