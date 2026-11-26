@@ -36,6 +36,13 @@ test('every rule flags its bad fixture with a fix, and passes its good fixture',
   }
 });
 
+test('every finding fix ends with a full stop', async () => {
+  for (const rule of await loadRules()) {
+    const bad = rule.check(await fixtureProject(rule.id, 'bad'));
+    for (const f of bad) assert.ok(f.fix.endsWith('.'), `${rule.id}: fix does not end with a full stop`);
+  }
+});
+
 test('contributor docs and templates exist', () => {
   for (const p of ['CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', '.github/pull_request_template.md', '.github/ISSUE_TEMPLATE/new-check.yml', '.github/ISSUE_TEMPLATE/false-positive.yml', '.github/workflows/ci.yml', 'docs/seed-issues.md']) {
     assert.ok(existsSync(root(p)), p);
