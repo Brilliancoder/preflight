@@ -52,6 +52,7 @@ npx vibe-preflight --json          # machine-readable output
 npx vibe-preflight --ignore a,b    # skip checks by id
 npx vibe-preflight --fail-on warning   # exit code policy: critical (default) | warning | never
 ```
+Set NO_COLOR=1 to turn off coloured output.
 
 Silence a finding that points at a line with `// preflight-ignore <check-id>` on that line or the line above. For findings about a whole file or project (for example a missing privacy page), skip the check with `--ignore <check-id>`.
 
