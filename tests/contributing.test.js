@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
+import { readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import template from '../src/rules/_template.js';
 import { loadRules } from '../src/rules/index.js';
@@ -55,4 +56,15 @@ test('contributor docs and templates exist', () => {
   }
   const seeds = readFileSync(root('docs/seed-issues.md'), 'utf8');
   assert.ok((seeds.match(/^## /gm) ?? []).length >= 15, 'at least 15 seed issues');
+});
+
+
+test("every rule's id matches its file name", async () => {
+    const dir = new URL('../src/rules/', import.meta.url);
+    const names = (await readdir(dir)).filter((n) => n.endsWith('.js') && n !== 'index.js' && !n.startsWith('_'));
+    assert.ok(names.length > 0, 'expected at least one rule file in src/rules/');
+    for (const name of names) {
+          const rule = (await import(new URL(name, dir))).default;
+          assert.equal(rule.id, name.slice(0, -3), name);
+    }
 });
