@@ -68,6 +68,7 @@ Silence a finding that points at a line with `// preflight-ignore <check-id>` on
 ```
 
 The command exits with code 1 when a finding reaches the `--fail-on` level, so a leaked key blocks the merge.
+See [docs/ci.md](docs/ci.md) for a full workflow.
 
 ## Use it inside Claude Code
 
