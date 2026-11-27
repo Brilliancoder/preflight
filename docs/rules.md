@@ -9,6 +9,7 @@ Every check lives in `src/rules/<id>.js`. Want one that isn't here? [Add it](../
 | `supabase-rls-disabled` | Security | critical | A SQL migration that creates a table without enabling row-level security |
 | `stripe-webhook-unverified` | Security | critical | A Stripe webhook handler that never verifies the signature with `constructEvent` |
 | `cors-wildcard` | Security | warning | `cors()` with no options, or `Access-Control-Allow-Origin: *` |
+| `open-redirect` | Security | warning | `res.redirect` or `redirect()` to a target taken straight from user input, with no allow-list check |
 | `next-public-secret` | Security | critical | A `NEXT_PUBLIC_*` variable whose name says secret (`*SECRET*`, `*SERVICE_ROLE*`, `*PRIVATE*`), so its value ships to the browser |
 | `vite-env-secret-prefix` | Security | critical | A `VITE_*`, `EXPO_PUBLIC_*` or `REACT_APP_*` name that says secret, so its value ships to the browser |
 | `jwt-secret-weak` | Security | critical | `jwt.sign` or `jwt.verify` with a hard-coded secret under 32 characters, or a placeholder such as `'secret'` |
