@@ -7,6 +7,7 @@ import privacy from '../../src/rules/no-privacy-policy.js';
 import meta from '../../src/rules/missing-meta-tags.js';
 import favicon from '../../src/rules/missing-favicon.js';
 import robots from '../../src/rules/missing-robots-txt.js';
+import lockfile from '../../src/rules/missing-lockfile.js';
 import notFound from '../../src/rules/missing-404-page.js';
 
 test('cors-wildcard flags cors() with no options and a * header', async () => {
@@ -286,4 +287,10 @@ test('missing-meta-tags accepts app/opengraph-image.* as the share image', () =>
   };
   assert.equal(layout.read('app/layout.tsx'), 'export const metadata = { title: "x", description: "y" };');
   assert.deepEqual(meta.check(layout), [], 'the opengraph-image file satisfies the share image');
+});
+
+// Preflight's file list skips binary files and anything over 1 MB, so bun.lockb and a large
+// package-lock.json never appear in project.files: the lockfile has to be looked up on disk.
+test('missing-lockfile is quiet when the lockfile is binary or too big to scan', async () => {
+  assert.deepEqual(lockfile.check(await fixtureProject('missing-lockfile', 'good-bun')), []);
 });
