@@ -7,6 +7,7 @@ Every check lives in `src/rules/<id>.js`. Want one that isn't here? [Add it](../
 | `env-file-committed` | Security | critical | A `.env` file (not `.env.example`) that `.gitignore` doesn't cover |
 | `secret-in-client` | Security | critical | Live Stripe, Anthropic, OpenAI, AWS or Supabase `service_role` keys in code that ships to the browser or app |
 | `supabase-rls-disabled` | Security | critical | A SQL migration that creates a table without enabling row-level security |
+| `firebase-rules-open` | Security | critical | `firestore.rules` or `database.rules.json` that lets anyone read or write |
 | `stripe-webhook-unverified` | Security | critical | A Stripe webhook handler that never verifies the signature with `constructEvent` |
 | `cors-wildcard` | Security | warning | `cors()` with no options, or `Access-Control-Allow-Origin: *` |
 | `next-public-secret` | Security | critical | A `NEXT_PUBLIC_*` variable whose name says secret (`*SECRET*`, `*SERVICE_ROLE*`, `*PRIVATE*`), so its value ships to the browser |
