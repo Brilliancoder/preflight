@@ -39,7 +39,7 @@ Scans a deliberately broken demo app (every secret is fake) so you can see what 
 
 ## What it checks
 
-17 checks today, across security, reliability and launch basics. See [all checks](docs/rules.md).
+18 checks today, across security, reliability and launch basics. See [all checks](docs/rules.md).
 
 | | |
 |---|---|
