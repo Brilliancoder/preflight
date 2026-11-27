@@ -17,6 +17,7 @@ Every check lives in `src/rules/<id>.js`. Want one that isn't here? [Add it](../
 | `sql-string-concat` | Security | warning | SQL built with a template literal or `+` from a value that comes from a request, instead of a bound parameter |
 | `no-error-monitoring` | Reliability | info | A JavaScript app with no Sentry, PostHog, Bugsnag, Rollbar or LogRocket |
 | `no-privacy-policy` | Launch basics | warning | An app that signs users up or collects emails but has no privacy page |
+| `no-terms-of-service` | Launch basics | warning | An app that takes payments (Stripe, Lemon Squeezy, Paddle or RevenueCat) with no terms page or route 
 | `missing-meta-tags` | Launch basics | warning | An `index.html` or Next.js root layout without a title, description or share image |
 | `missing-favicon` | Launch basics | info | An `index.html` or Next.js root layout with no `favicon.ico`, `icon.png`, `app/icon.*` or `<link rel="icon">` |
 | `missing-robots-txt` | Launch basics | info | An `index.html`, Next.js root layout or `pages/_app` with no `robots.txt` (root or `public/`) and no `app/robots.*` route |
