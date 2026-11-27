@@ -1,6 +1,9 @@
 // A package.json with dependencies but no lockfile anywhere above it,
 // so installs are not reproducible.
-const LOCKFILES = new Set(['package-lock.json', 'pnpm-lock.yaml', 'yarn.lock', 'bun.lockb']);
+import { existsSync } from 'node:fs';
+import path from 'node:path';
+
+const LOCKFILES = ['package-lock.json', 'npm-shrinkwrap.json', 'pnpm-lock.yaml', 'yarn.lock', 'bun.lock', 'bun.lockb'];
 
 function hasDependencies(text) {
   try {
@@ -25,11 +28,17 @@ export default {
   category: 'reliability',
   severity: 'info',
   check(project) {
-    const lockDirs = new Set();
-    for (const file of project.files) {
-      const base = file.slice(file.lastIndexOf('/') + 1);
-      if (LOCKFILES.has(base)) lockDirs.add(dirOf(file));
-    }
+    // Looked up on disk, not in project.files: the file list skips binary files (bun.lockb) and
+    // anything over 1 MB, which a real package-lock.json often is.
+    const checked = new Map();
+    const lockDirs = {
+      has(dir) {
+        if (!checked.has(dir)) {
+          checked.set(dir, LOCKFILES.some((name) => existsSync(path.join(project.root, dir, name))));
+        }
+        return checked.get(dir);
+      },
+    };
     const findings = [];
     for (const file of project.files) {
       if (!/(^|\/)package\.json$/.test(file)) continue;
