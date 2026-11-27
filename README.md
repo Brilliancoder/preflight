@@ -39,7 +39,7 @@ Scans a deliberately broken demo app (every secret is fake) so you can see what 
 
 ## What it checks
 
-18 checks today, across security, reliability and launch basics. See [all checks](docs/rules.md).
+23 checks today, across security, reliability and launch basics. See [all checks](docs/rules.md).
 
 | | |
 |---|---|
@@ -68,6 +68,7 @@ Silence a finding that points at a line with `// preflight-ignore <check-id>` on
 ```
 
 The command exits with code 1 when a finding reaches the `--fail-on` level, so a leaked key blocks the merge.
+See [docs/ci.md](docs/ci.md) for a full workflow.
 
 ## Use it inside Claude Code
 
